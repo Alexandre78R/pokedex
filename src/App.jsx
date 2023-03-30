@@ -33,12 +33,12 @@ function App() {
       },
   ];
 
-  useEffect(
-    () => {
-      alert("hello pokemon trainer :)");
-    },
-    []
-  );
+  // useEffect(
+  //   () => {
+  //     alert("hello pokemon trainer :)");
+  //   },
+  //   []
+  // );
   return (
     <div>
       <NavBar pokemonList={pokemonList} pokemonIndex={pokemonIndex} setCount={setCount}/>
