@@ -1,9 +1,12 @@
 import { useState } from 'react'
 import './App.css'
 import PokemonCard from './components/PokemonCard.jsx';
+import NavBar from './components/NavBar.jsx';
 
 function App() {
+
   const [pokemonIndex, setCount] = useState(0)
+
 
   const pokemonList = [
     {
@@ -30,29 +33,9 @@ function App() {
         name: "mew",
       },
   ];
-  const handleClickMore = () => {
-    // setCount(c)
-    setCount(pokemonIndex - 1);
-  }
-
-  const handleClickless = () => {
-    setCount(pokemonIndex + 1);
-  }
-
   return (
     <div>
-      {
-      pokemonIndex === 0 ?
-      ""
-      :
-      <button onClick={handleClickMore}>Précédent</button>
-      }
-      {
-         pokemonIndex === (pokemonList.length-1) ?
-         ""
-         :
-         <button onClick={handleClickless}>Suivant</button>
-      }
+      <NavBar pokemonList={pokemonList} pokemonIndex={pokemonIndex} setCount={setCount}/>
       <PokemonCard  pokemon={pokemonList[pokemonIndex]}/>
     </div>
   )
