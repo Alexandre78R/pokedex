@@ -2,7 +2,7 @@ import { useEffect } from 'react'
 
 function NavBar ({pokemonList, pokemonIndex, setCount}) {
 
-    const mortCreatePersonQuete = (position) => {
+    const handleClick = (position) => {
         setCount(pokemonIndex = position);
     }
 
@@ -10,7 +10,7 @@ function NavBar ({pokemonList, pokemonIndex, setCount}) {
         <div>
             {
                 pokemonList.map((pokemon, i) =>
-                    <button onClick={() =>mortCreatePersonQuete(i)} key={pokemon.name}>{pokemon.name}</button>
+                    <button onClick={() =>handleClick(i)} key={pokemon.name}>{pokemon.name}</button>
                 )
             }
         </div>
