@@ -1,6 +1,6 @@
 // import PropTypes from "prop-types";
 import colors from "../color.js";
-
+import { useState, useEffect } from 'react';
 function PokemonCard({ pokemon, pokemonEvolutionNext, pokemonEvolutionPrev, setPosition, setPokemonEvolutionNext, setPokemonEvolutionPrev}) {
 
     // console.log('pokemon', pokemon);
@@ -41,7 +41,18 @@ function PokemonCard({ pokemon, pokemonEvolutionNext, pokemonEvolutionPrev, setP
         setPosition(pokemonEvolutionPrev.id-1);
       }
     }
-
+    useEffect(() => {
+      if (pokemon.evolution.prev !== undefined) {
+        fetch(`https://api.pikaserve.xyz/pokemon/${pokemon.evolution.prev[0]}`)
+        .then(response => response.json())
+        .then(data => setPokemonEvolutionPrev(data)); 
+        }
+      if (pokemon.evolution.next !== undefined) {
+        fetch(`https://api.pikaserve.xyz/pokemon/${pokemon.evolution.next[0][0]}`)
+        .then(response => response.json())
+        .then(data => setPokemonEvolutionNext(data));
+      } 
+    }, []);
     return (
         <figure style={{backgroundColor : colors[pokemon.type[0]], borderRadius: 10,}}>
         {

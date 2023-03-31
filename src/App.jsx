@@ -16,19 +16,9 @@ function App() {
       await fetch('https://api.pikaserve.xyz/pokemon/all')
       .then(response => response.json())
       .then(data => setCount(data));
-      await seachPage();
     }
-
     openPage();
-    // console.log(pokemonIndex);
-    // const searchPoke = () => {
-    //   console.log("PokemonIndex", pokemonIndex);
-    // }
-    // searchPoke()
   }, []);
-  const seachPage = async () => {
-    await console.log("pokemonIndex-->", pokemonIndex)
-  }
   return (
     <div style={{display: "grid", gridTemplateColumns:"1fr 1fr", gridTemplateRows:"1fr"}}>
       <div style={{gridArea: "1 / 1 / 2 / 2"}}>
