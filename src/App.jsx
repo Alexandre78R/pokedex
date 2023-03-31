@@ -1,35 +1,49 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
+import { useState, useEffect } from 'react'
 import './App.css'
+import PokemonCard from './components/PokemonCard.jsx';
+import NavBar from './components/NavBar.jsx';
 
 function App() {
-  const [count, setCount] = useState(0)
 
+  const [pokemonIndex, setCount] = useState([]);
+  const [pokemonPosition, setPosition] = useState(0);
+  const [pokemonEvolutionPrev, setPokemonEvolutionPrev] = useState([]);
+  const [pokemonEvolutionNext, setPokemonEvolutionNext] = useState([]);
+  useEffect(() => {
+    // fetch('https://pokebuildapi.fr/api/v1/pokemon')
+    // fetch('https://pokeapi.co/api/v2/pokemon?offset=0&limit=1500')
+    const openPage = async () => {
+      await fetch('https://api.pikaserve.xyz/pokemon/all')
+      .then(response => response.json())
+      .then(data => setCount(data));
+      await seachPage();
+    }
+
+    openPage();
+    // console.log(pokemonIndex);
+    // const searchPoke = () => {
+    //   console.log("PokemonIndex", pokemonIndex);
+    // }
+    // searchPoke()
+  }, []);
+  const seachPage = async () => {
+    await console.log("pokemonIndex-->", pokemonIndex)
+  }
   return (
-    <div className="App">
-      <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://reactjs.org" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
+    <div style={{display: "grid", gridTemplateColumns:"1fr 1fr", gridTemplateRows:"1fr"}}>
+      <div style={{gridArea: "1 / 1 / 2 / 2"}}>
+        <NavBar pokemonList={pokemonIndex} pokemonPosition={pokemonPosition} setPosition={setPosition} setPokemonEvolutionNext={setPokemonEvolutionNext} setPokemonEvolutionPrev={setPokemonEvolutionPrev}/>
       </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
+      {
+      pokemonIndex.length === 0 ?
+      ""
+      :
+      <div style={{gridArea: "1 / 2 / 2 / 3"}}>
+        <PokemonCard pokemon={pokemonIndex[pokemonPosition]} pokemonEvolutionNext={pokemonEvolutionNext} pokemonEvolutionPrev={pokemonEvolutionPrev} setPosition={setPosition} setPokemonEvolutionNext={setPokemonEvolutionNext} setPokemonEvolutionPrev={setPokemonEvolutionPrev}/>
       </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
+      }
     </div>
   )
 }
 
-export default App
+export default App;
