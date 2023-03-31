@@ -1,33 +1,33 @@
-import { useEffect } from 'react'
+import { useState, useEffect } from 'react';
 
-function NavBar ({pokemonList, pokemonIndex, setCount}) {
+function NavBar ({pokemonList, pokemonPosition, setPosition, setPokemonEvolutionNext, setPokemonEvolutionPrev}) {
 
-    const handleClick = (position) => {
-        setCount(pokemonIndex = position);
+    const handleClick = (pokemon, position) => {
+        if (pokemon.evolution.next == undefined){
+            setPokemonEvolutionNext([]);
+          } else {
+            fetch(`https://api.pikaserve.xyz/pokemon/${pokemon.evolution.next[0][0]}`)
+            .then(response => response.json())
+            .then(data => setPokemonEvolutionNext(data)); 
+          }
+        if (pokemon.evolution.prev == undefined){
+            setPokemonEvolutionPrev([]);
+        } else {
+        fetch(`https://api.pikaserve.xyz/pokemon/${pokemon.evolution.prev[0]}`)
+        .then(response => response.json())
+        .then(data => setPokemonEvolutionPrev(data)); 
+        }
+        setPosition(pokemonPosition = position);
     }
 
     return (
         <div>
             {
                 pokemonList.map((pokemon, i) =>
-                    <button onClick={() =>handleClick(i)} key={pokemon.name}>{pokemon.name}</button>
+                    <button style={{width: "33%", fontSize:"1.5rem"}} onClick={() =>handleClick(pokemon, i)} key={pokemon.name.english}>{pokemon.name.english}</button>
                 )
             }
         </div>
-    //     <div>
-    //         {
-    //         pokemonIndex === 0 ?
-    //         ""
-    //         :
-    //         <button onClick={handleClickMore}>Précédent</button>
-    //         }
-    //         {
-    //             pokemonIndex === (pokemonList.length-1) ?
-    //             ""
-    //             :
-    //             <button onClick={handleClickless}>Suivant</button>
-    //         }
-    //     </div>
     )
   }
 export default NavBar;

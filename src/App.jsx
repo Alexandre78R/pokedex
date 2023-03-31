@@ -5,44 +5,43 @@ import NavBar from './components/NavBar.jsx';
 
 function App() {
 
-  const [pokemonIndex, setCount] = useState(0)
+  const [pokemonIndex, setCount] = useState([]);
+  const [pokemonPosition, setPosition] = useState(0);
+  const [pokemonEvolutionPrev, setPokemonEvolutionPrev] = useState([]);
+  const [pokemonEvolutionNext, setPokemonEvolutionNext] = useState([]);
+  useEffect(() => {
+    // fetch('https://pokebuildapi.fr/api/v1/pokemon')
+    // fetch('https://pokeapi.co/api/v2/pokemon?offset=0&limit=1500')
+    const openPage = async () => {
+      await fetch('https://api.pikaserve.xyz/pokemon/all')
+      .then(response => response.json())
+      .then(data => setCount(data));
+      await seachPage();
+    }
 
-  const pokemonList = [
-    {
-        name: "bulbasaur",
-        imgSrc:
-          "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/1.png",
-      },
-      {
-        name: "charmander",
-        imgSrc:
-          "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/4.png",
-      },
-      {
-        name: "squirtle",
-        imgSrc:
-          "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/7.png",
-      },
-      {
-        name: "pikachu",
-        imgSrc:
-          "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/25.png",
-      },
-      {
-        name: "mew",
-      },
-  ];
-
-  // useEffect(
-  //   () => {
-  //     alert("hello pokemon trainer :)");
-  //   },
-  //   []
-  // );
+    openPage();
+    // console.log(pokemonIndex);
+    // const searchPoke = () => {
+    //   console.log("PokemonIndex", pokemonIndex);
+    // }
+    // searchPoke()
+  }, []);
+  const seachPage = async () => {
+    await console.log("pokemonIndex-->", pokemonIndex)
+  }
   return (
-    <div>
-      <NavBar pokemonList={pokemonList} pokemonIndex={pokemonIndex} setCount={setCount}/>
-      <PokemonCard  pokemon={pokemonList[pokemonIndex]}/>
+    <div style={{display: "grid", gridTemplateColumns:"1fr 1fr", gridTemplateRows:"1fr"}}>
+      <div style={{gridArea: "1 / 1 / 2 / 2"}}>
+        <NavBar pokemonList={pokemonIndex} pokemonPosition={pokemonPosition} setPosition={setPosition} setPokemonEvolutionNext={setPokemonEvolutionNext} setPokemonEvolutionPrev={setPokemonEvolutionPrev}/>
+      </div>
+      {
+      pokemonIndex.length === 0 ?
+      ""
+      :
+      <div style={{gridArea: "1 / 2 / 2 / 3"}}>
+        <PokemonCard pokemon={pokemonIndex[pokemonPosition]} pokemonEvolutionNext={pokemonEvolutionNext} pokemonEvolutionPrev={pokemonEvolutionPrev} setPosition={setPosition} setPokemonEvolutionNext={setPokemonEvolutionNext} setPokemonEvolutionPrev={setPokemonEvolutionPrev}/>
+      </div>
+      }
     </div>
   )
 }
