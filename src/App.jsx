@@ -9,6 +9,7 @@ function App() {
   const [pokemonPosition, setPosition] = useState(0);
   const [pokemonEvolutionPrev, setPokemonEvolutionPrev] = useState([]);
   const [pokemonEvolutionNext, setPokemonEvolutionNext] = useState([]);
+
   useEffect(() => {
     // fetch('https://pokebuildapi.fr/api/v1/pokemon')
     // fetch('https://pokeapi.co/api/v2/pokemon?offset=0&limit=1500')
@@ -19,6 +20,7 @@ function App() {
     }
     openPage();
   }, []);
+
   return (
     <div style={{display: "grid", gridTemplateColumns:"1fr 1fr", gridTemplateRows:"1fr"}}>
       <div style={{gridArea: "1 / 1 / 2 / 2"}}>

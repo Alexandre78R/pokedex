@@ -1,12 +1,9 @@
 // import PropTypes from "prop-types";
 import colors from "../color.js";
-import { useState, useEffect } from 'react';
+import { useEffect } from 'react';
 function PokemonCard({ pokemon, pokemonEvolutionNext, pokemonEvolutionPrev, setPosition, setPokemonEvolutionNext, setPokemonEvolutionPrev}) {
-
-    // console.log('pokemon', pokemon);
-    // console.log('pokemonEvolutionNext', pokemonEvolutionNext);
-    // console.log('pokemonEvolutionPrev', pokemonEvolutionPrev);
-    const switchPokemon = (pagination) => {
+    
+  const switchPokemon = (pagination) => {
       if (pagination) {
         if(pokemonEvolutionNext.evolution.prev == undefined) {
           setPokemonEvolutionPrev([]);
@@ -41,6 +38,7 @@ function PokemonCard({ pokemon, pokemonEvolutionNext, pokemonEvolutionPrev, setP
         setPosition(pokemonEvolutionPrev.id-1);
       }
     }
+
     useEffect(() => {
       if (pokemon.evolution.prev !== undefined) {
         fetch(`https://api.pikaserve.xyz/pokemon/${pokemon.evolution.prev[0]}`)
@@ -53,8 +51,9 @@ function PokemonCard({ pokemon, pokemonEvolutionNext, pokemonEvolutionPrev, setP
         .then(data => setPokemonEvolutionNext(data));
       } 
     }, []);
+
     return (
-        <figure style={{backgroundColor : colors[pokemon.type[0]], borderRadius: 10,}}>
+        <figure style={{backgroundColor : colors[pokemon.type[0]], borderRadius: 10, marginTop : -30}}>
         {
           pokemon.image.thumbnail == undefined ?
             <p>???</p>
@@ -64,7 +63,7 @@ function PokemonCard({ pokemon, pokemonEvolutionNext, pokemonEvolutionPrev, setP
                 <h3>{pokemon.name.english} - {pokemon.name.french} - {pokemon.name.chinese} - {pokemon.name.japanese} <img style={{marginBottom : -5}} src={pokemon.image.sprite}
                 alt={pokemon.name.english}></img></h3>
               </div>
-              <img style={{backgroundColor: "White", borderRadius: "50%", height:"150px", padding:"1rem"}} src={pokemon.image.thumbnail}
+              <img style={{backgroundColor: "White", padding:"1.5rem", borderRadius: "50%", height:"150px"}} src={pokemon.image.thumbnail}
               alt={pokemon.name.english}></img>
               <div>
                 { pokemon.base == undefined ?
