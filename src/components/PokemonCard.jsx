@@ -4,6 +4,8 @@ import { useEffect } from 'react';
 
 function PokemonCard({ pokemon, pokemonEvolutionNext, pokemonEvolutionPrev, setPosition, setPokemonEvolutionNext, setPokemonEvolutionPrev}) {
   
+  // const [poke, setPoke] = useState([]);
+  console.log("pokemon", pokemon);
   const switchPokemon = async (pagination, position) => {
       if (pagination) {
         if(pokemonEvolutionNext[position].evolution.prev == undefined) {
@@ -61,6 +63,12 @@ function PokemonCard({ pokemon, pokemonEvolutionNext, pokemonEvolutionPrev, setP
     }
 
     useEffect(() => {
+      const searchDataPokemon = async () => {
+        await fetch(pokemon.url)
+        .then(response => response.json())
+        .then(data => setCount(data));
+      }
+      searchDataPokemon();
       const searchDataEvolution = async () => {
         if (pokemon.evolution.prev !== undefined) {
           if (pokemon.evolution.prev.length !== 0) {
@@ -85,8 +93,17 @@ function PokemonCard({ pokemon, pokemonEvolutionNext, pokemonEvolutionPrev, setP
       }
       searchDataEvolution();
     }, []);
-
+    // const test = () => {
+      // const searchDataPokemon = async () => {
+      //   await fetch(pokemon.url)
+      //   .then(response => response.json())
+      //   .then(data => console.log(data));
+      // }
+      // searchDataPokemon();
+    // }
     return (
+      // <p>ss</p>
+      // <button onClick={() => searchDataPokemon()}>Test</button>
         <figure style={{backgroundColor : colors[pokemon.type[0]], borderRadius: 10, marginTop : -30}}>
         {
           pokemon.image.thumbnail == undefined ?
@@ -147,7 +164,7 @@ function PokemonCard({ pokemon, pokemonEvolutionNext, pokemonEvolutionPrev, setP
                       <div onClick={() => switchPokemon(false, i)}>
                         <img style={{marginBottom : -5, margin:0}} src={pokemon.image.sprite}
                         alt={pokemon.name.english}></img> 
-                        <p style={{mdargin:0, display:"flex", marginLeft : 15, marginBottom : 10}}>{pokemon.name.english}</p>
+                        <p style={{mdargin:0, display:"flex", marginLeft : 15, marginTop : -10}}>{pokemon.name.english}</p>
                       </div>
                     )}
                   </div>

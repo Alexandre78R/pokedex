@@ -5,7 +5,7 @@ function Menu ({pokemonList, pokemonPosition, setPosition, setPokemonEvolutionNe
 
     const [currentPage, setCurrentPage] = useState(1);
     // Nombre de produits par page
-    const [pokemonPerPage] = useState(36);
+    const [pokemonPerPage] = useState(48);
   
     // Fonction qui retourne un sous-ensemble de produits en fonction de la page actuelle
     const getCurrentPokemon = () => {
@@ -45,8 +45,9 @@ function Menu ({pokemonList, pokemonPosition, setPosition, setPokemonEvolutionNe
 
     return (
         <div>
+            {/* <p>menu</p> */}
             {getCurrentPokemon().map((pokemon)  => (
-            <button style={{width: "50%", fontSize:"1.2rem", }} onClick={() =>handleClick(pokemon)} key={pokemon.name.english}>
+            <button style={{width: "33%", fontSize:"1.2rem", }} onClick={() =>handleClick(pokemon)} key={pokemon.name.english}>
                 {
                     pokemon.id <= 9 ? 
                     `${pokemon.name.english}#00${pokemon.id}`

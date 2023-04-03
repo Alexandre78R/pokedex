@@ -1,13 +1,27 @@
+* {
+  box-sizing: border-box;
+  padding: 0;
+  border: 0;
+  cursor: default;
+}
+
+html,
+body {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  display: table;
+  width: 100%;
+}
+
 #root {
-  max-width: 1280px;
-  margin: 0 auto;
-  padding: 2rem;
   text-align: center;
 }
 
 .logo {
-  height: 6em;
-  padding: 1.5em;
   will-change: filter;
   transition: filter 300ms;
 }
@@ -39,4 +53,40 @@
 
 .read-the-docs {
   color: #888;
+}
+
+nav {
+  display: flex;
+  justify-content: space-between;
+  padding: 1rem 3rem;
+  background: rgb(87, 167, 237);
+}
+
+nav ul {
+  display: flex;
+  list-style: none;
+}
+
+nav h2 {
+  display: inline-block;
+  color: #fff;
+  text-align: center;
+  left: 100%;
+  width: 80px;
+  font-weight: bold;
+}
+
+nav li {
+  padding-left: 2rem;
+  margin-top: 5%;
+}
+
+nav li a {
+  color: #fff;
+  text-decoration: none;
+}
+
+nav li a:hover {
+  color: #2f5b81;
+  text-decoration: none;
 }
