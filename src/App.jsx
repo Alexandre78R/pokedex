@@ -3,6 +3,7 @@ import './App.css'
 import PokemonCard from './components/PokemonCard.jsx';
 import Menu from './components/Menu.jsx';
 import NavBar from './components/NavBar.jsx';
+import Footer from './components/Footer.jsx';
 
 function App() {
 
@@ -29,9 +30,9 @@ function App() {
   }, []);
 
   return (
-    <div>
+    <div class="app">
       <NavBar/>
-      <div style={{display: "grid", gridTemplateColumns:"1fr 1fr", gridTemplateRows:"1fr"}}>
+      <div style={{display: "grid", gridTemplateColumns:"1fr 1fr", gridTemplateRows:"1fr", marginTop:"2%"}}>
         <div style={{gridArea: "1 / 1 / 2 / 2"}}>
           {/* <Menu pokemonList={pokemonIndex[pokemonPosition]} pokemonPosition={pokemonPosition} setPosition={setPosition} setPokemonEvolutionNext={setPokemonEvolutionNext} setPokemonEvolutionPrev={setPokemonEvolutionPrev}/> */}
         
@@ -45,6 +46,9 @@ function App() {
           <PokemonCard pokemon={pokemonIndex[pokemonPosition]} pokemonEvolutionNext={pokemonEvolutionNext} pokemonEvolutionPrev={pokemonEvolutionPrev} setPosition={setPosition} setPokemonEvolutionNext={setPokemonEvolutionNext} setPokemonEvolutionPrev={setPokemonEvolutionPrev}/>
         </div>
         }
+      </div>
+      <div class="test">
+        <Footer/>
       </div>
     </div>
   )
