@@ -1,9 +1,7 @@
-import { useState, useEffect } from 'react';
-
 function Pagination ({ currentPage, totalPages, onPageChange }) {
 
   // Calcule le nombre de pages à afficher avant et après la page courante
-  const pagesToShow = 1;
+  const pagesToShow = 2;
   const pageStart = Math.max(currentPage - pagesToShow, 1);
   const pageEnd = Math.min(currentPage + pagesToShow, totalPages);
 
@@ -16,6 +14,7 @@ function Pagination ({ currentPage, totalPages, onPageChange }) {
       </button>
     );
   }
+
     return (
         <div className="pagination">
         {currentPage > 1 && (
