@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react'
 import './App.css'
 import PokemonCard from './components/PokemonCard.jsx';
-import NavBar from './components/NavBar.jsx';
+import Menu from './components/Menu.jsx';
 
 function App() {
 
@@ -24,13 +24,13 @@ function App() {
   return (
     <div style={{display: "grid", gridTemplateColumns:"1fr 1fr", gridTemplateRows:"1fr"}}>
       <div style={{gridArea: "1 / 1 / 2 / 2"}}>
-        <NavBar pokemonList={pokemonIndex} pokemonPosition={pokemonPosition} setPosition={setPosition} setPokemonEvolutionNext={setPokemonEvolutionNext} setPokemonEvolutionPrev={setPokemonEvolutionPrev}/>
+        <Menu pokemonList={pokemonIndex} pokemonPosition={pokemonPosition} setPosition={setPosition} setPokemonEvolutionNext={setPokemonEvolutionNext} setPokemonEvolutionPrev={setPokemonEvolutionPrev}/>
       </div>
       {
       pokemonIndex.length === 0 ?
       ""
       :
-      <div style={{gridArea: "1 / 2 / 2 / 3",}}>
+      <div style={{gridArea: "1 / 2 / 2 / 3", }}>
         <PokemonCard pokemon={pokemonIndex[pokemonPosition]} pokemonEvolutionNext={pokemonEvolutionNext} pokemonEvolutionPrev={pokemonEvolutionPrev} setPosition={setPosition} setPokemonEvolutionNext={setPokemonEvolutionNext} setPokemonEvolutionPrev={setPokemonEvolutionPrev}/>
       </div>
       }
