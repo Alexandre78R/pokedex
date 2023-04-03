@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import Pagination from './Pagination.jsx';
 
-function NavBar ({pokemonList, pokemonPosition, setPosition, setPokemonEvolutionNext, setPokemonEvolutionPrev}) {
+function Menu ({pokemonList, pokemonPosition, setPosition, setPokemonEvolutionNext, setPokemonEvolutionPrev}) {
 
     const [currentPage, setCurrentPage] = useState(1);
     // Nombre de produits par page
@@ -67,4 +67,4 @@ function NavBar ({pokemonList, pokemonPosition, setPosition, setPokemonEvolution
     )
   }
 
-export default NavBar;
+export default Menu;
