@@ -14,20 +14,31 @@ function NavBar ({pokemonList, pokemonPosition, setPosition, setPokemonEvolution
       return pokemonList.slice(indexOfFirstPokemon, indexOfLastPokemon);
     };
     
-    const handleClick = (pokemon) => {
+    const handleClick = async (pokemon) => {
         if (pokemon.evolution.next == undefined){
-            setPokemonEvolutionNext([]);
+            await setPokemonEvolutionNext([]);
           } else {
-            fetch(`https://api.pikaserve.xyz/pokemon/${pokemon.evolution.next[0][0]}`)
-            .then(response => response.json())
-            .then(data => setPokemonEvolutionNext(data)); 
+            let dataEvolutionNext = [];
+            for (let i = 0; i < pokemon.evolution.next.length; i++) {
+                await fetch(`https://api.pikaserve.xyz/pokemon/${pokemon.evolution.next[i][0]}`)
+                .then(response => response.json())
+                .then(data => dataEvolutionNext.push(data)); 
+            }
+            await console.log("dataEvolutionNext", dataEvolutionNext);
+            await setPokemonEvolutionNext(dataEvolutionNext);
           }
         if (pokemon.evolution.prev == undefined){
-            setPokemonEvolutionPrev([]);
+            await setPokemonEvolutionPrev([]);
         } else {
-        fetch(`https://api.pikaserve.xyz/pokemon/${pokemon.evolution.prev[0]}`)
-        .then(response => response.json())
-        .then(data => setPokemonEvolutionPrev(data)); 
+            let dataEvolutionPrev = [];
+            for (let i = 0; i < pokemon.evolution.prev.length; i++) {
+                if (!isNaN(pokemon.evolution.prev[i])){
+                    await fetch(`https://api.pikaserve.xyz/pokemon/${pokemon.evolution.prev[i]}`)
+                    .then(response => response.json())
+                    .then(data => dataEvolutionPrev.push(data));
+                }
+            }
+            await setPokemonEvolutionPrev(dataEvolutionPrev)
         }
         setPosition(pokemonPosition = pokemon.id-1);
     }
@@ -55,4 +66,5 @@ function NavBar ({pokemonList, pokemonPosition, setPosition, setPokemonEvolution
         </div>
     )
   }
+
 export default NavBar;

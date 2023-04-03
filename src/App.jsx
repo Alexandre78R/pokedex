@@ -13,12 +13,12 @@ function App() {
   useEffect(() => {
     // fetch('https://pokebuildapi.fr/api/v1/pokemon')
     // fetch('https://pokeapi.co/api/v2/pokemon?offset=0&limit=1500')
-    const openPage = async () => {
+    const searchData = async () => {
       await fetch('https://api.pikaserve.xyz/pokemon/all')
       .then(response => response.json())
       .then(data => setCount(data));
     }
-    openPage();
+    searchData();
   }, []);
 
   return (
@@ -30,7 +30,7 @@ function App() {
       pokemonIndex.length === 0 ?
       ""
       :
-      <div style={{gridArea: "1 / 2 / 2 / 3"}}>
+      <div style={{gridArea: "1 / 2 / 2 / 3",}}>
         <PokemonCard pokemon={pokemonIndex[pokemonPosition]} pokemonEvolutionNext={pokemonEvolutionNext} pokemonEvolutionPrev={pokemonEvolutionPrev} setPosition={setPosition} setPokemonEvolutionNext={setPokemonEvolutionNext} setPokemonEvolutionPrev={setPokemonEvolutionPrev}/>
       </div>
       }
